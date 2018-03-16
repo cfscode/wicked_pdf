@@ -330,7 +330,7 @@ class WickedPdf
     possible_locations = (ENV['PATH'].split(':') + %w(/usr/bin /usr/local/bin ~/bin)).uniq
     exe_path ||= WickedPdf.config[:exe_path] unless WickedPdf.config.empty?
     exe_path ||= begin
-      detected_path = (defined?(Bundler) ? `bundle exec which wkhtmltopdf` : `which wkhtmltopdf`).chomp
+      detected_path = (defined?(Bundler) ? Bundler.which('wkhtmltopdf') : `which wkhtmltopdf`).chomp
       detected_path.present? && detected_path
     rescue
       nil
